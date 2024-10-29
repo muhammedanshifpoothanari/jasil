@@ -93,7 +93,7 @@ export default function EnhancedPortfolio() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [showScrollTop, setShowScrollTop] = useState(false)
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:any) => {
     console.log(data)
     // Here you would typically send the form data to a server
   }
@@ -120,8 +120,10 @@ export default function EnhancedPortfolio() {
   }
 
   return (
-    <div className={`min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300`}
-         style={{ '--color-primary': currentTheme.primary }}>
+<div
+  className={`min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300`}
+  style={{ '--color-primary': currentTheme.primary } as React.CSSProperties}
+>
       <div className="custom-cursor"></div>
       
       <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-90 backdrop-filter backdrop-blur-lg">
@@ -466,7 +468,11 @@ export default function EnhancedPortfolio() {
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                     👤
                   </span>
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                  {errors.name && (
+  <p className="text-red-500 text-sm mt-1">
+    {typeof errors.name.message === 'string' ? errors.name.message : 'Invalid error message'}
+  </p>
+)}
                 </div>
                 <div className="relative">
                   <Input
@@ -484,7 +490,11 @@ export default function EnhancedPortfolio() {
                   <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                     ✉️
                   </span>
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                  {errors.email && (
+  <p className="text-red-500 text-sm mt-1">
+    {typeof errors.email.message === 'string' ? errors.email.message : 'Invalid error message'}
+  </p>
+)}
                 </div>
                 <div className="relative">
                   <Textarea
@@ -496,7 +506,11 @@ export default function EnhancedPortfolio() {
                   <span className="absolute left-3 top-6 text-gray-400">
                     💬
                   </span>
-                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+                  {errors.message && (
+  <p className="text-red-500 text-sm mt-1">
+    {typeof errors.message.message === 'string' ? errors.message.message : 'Invalid error message'}
+  </p>
+)}
                 </div>
                 <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white">
                   Send Message
